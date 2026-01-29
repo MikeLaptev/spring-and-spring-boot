@@ -2033,6 +2033,7 @@ logging:
 app:
   name: Spring Data JPA Persistence Demo
   environment: ${spring.profiles.active:default}
+  description: "Spring Data JPA Persistence Demo application"
 ```
 
 **2. Create `application-dev.yml` (development profile):**
@@ -2201,7 +2202,12 @@ public class ProfileConfig {
         return new FeatureToggle("debug-logging", true);
     }
 
-    // ... inner classes for DatabaseInfo, FeatureToggle, ApplicationInfo
+    // Records for profile-specific configuration
+    public record DatabaseInfo(String type, String location, String purpose, boolean consoleEnabled) {}
+
+    public record FeatureToggle(String name, boolean enabled) {}
+
+    public record ApplicationInfo(String name, String environment, String description) {}
 }
 ```
 
@@ -2228,10 +2234,10 @@ class DevProfileTest {
 
     @Test
     void testDevProfileConfiguration() {
-        assertEquals("H2", databaseInfo.getType());
-        assertEquals("Development", databaseInfo.getPurpose());
-        assertTrue(databaseInfo.isConsoleEnabled());
-        assertEquals("dev", applicationInfo.getEnvironment());
+        assertEquals("H2", databaseInfo.type());
+        assertEquals("Development", databaseInfo.purpose());
+        assertTrue(databaseInfo.consoleEnabled());
+        assertEquals("dev", applicationInfo.environment());
     }
 }
 ```

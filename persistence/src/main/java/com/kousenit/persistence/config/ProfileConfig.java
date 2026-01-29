@@ -88,69 +88,10 @@ public class ProfileConfig {
         return new ApplicationInfo(appName, environment, description);
     }
 
-    // Inner classes for demonstration
-    public static class DatabaseInfo {
-        private final String type;
-        private final String location;
-        private final String purpose;
-        private final boolean consoleEnabled;
+    // Records for profile-specific configuration
+    public record DatabaseInfo(String type, String location, String purpose, boolean consoleEnabled) {}
 
-        public DatabaseInfo(String type, String location, String purpose, boolean consoleEnabled) {
-            this.type = type;
-            this.location = location;
-            this.purpose = purpose;
-            this.consoleEnabled = consoleEnabled;
-        }
+    public record FeatureToggle(String name, boolean enabled) {}
 
-        public String getType() { return type; }
-        public String getLocation() { return location; }
-        public String getPurpose() { return purpose; }
-        public boolean isConsoleEnabled() { return consoleEnabled; }
-
-        @Override
-        public String toString() {
-            return String.format("DatabaseInfo{type='%s', location='%s', purpose='%s', consoleEnabled=%s}",
-                    type, location, purpose, consoleEnabled);
-        }
-    }
-
-    public static class FeatureToggle {
-        private final String name;
-        private final boolean enabled;
-
-        public FeatureToggle(String name, boolean enabled) {
-            this.name = name;
-            this.enabled = enabled;
-        }
-
-        public String getName() { return name; }
-        public boolean isEnabled() { return enabled; }
-
-        @Override
-        public String toString() {
-            return String.format("FeatureToggle{name='%s', enabled=%s}", name, enabled);
-        }
-    }
-
-    public static class ApplicationInfo {
-        private final String name;
-        private final String environment;
-        private final String description;
-
-        public ApplicationInfo(String name, String environment, String description) {
-            this.name = name;
-            this.environment = environment;
-            this.description = description;
-        }
-
-        public String getName() { return name; }
-        public String getEnvironment() { return environment; }
-        public String getDescription() { return description; }
-
-        @Override
-        public String toString() {
-            return String.format("ApplicationInfo{name='%s', environment='%s', description='%s'}",
-                    name, environment, description);
-        }
-    }
+    public record ApplicationInfo(String name, String environment, String description) {}
 }

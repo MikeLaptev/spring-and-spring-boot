@@ -41,7 +41,7 @@ class ProfileDemonstrationTest {
         // This test shows how profile-specific properties work together
         
         assertNotNull(applicationInfo);
-        logger.info("Application running with profiles: {}", applicationInfo.getEnvironment());
+        logger.info("Application running with profiles: {}", applicationInfo.environment());
     }
 
     @Test

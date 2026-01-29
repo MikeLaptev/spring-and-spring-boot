@@ -78,19 +78,19 @@ class ProdProfileTest {
     @Test
     void testProdProfileConfiguration() {
         // Test database configuration
-        assertEquals("PostgreSQL", databaseInfo.getType());
-        assertEquals("Docker Container", databaseInfo.getLocation());
-        assertEquals("Production", databaseInfo.getPurpose());
-        assertFalse(databaseInfo.isConsoleEnabled(), "H2 console should be disabled in prod profile");
+        assertEquals("PostgreSQL", databaseInfo.type());
+        assertEquals("Docker Container", databaseInfo.location());
+        assertEquals("Production", databaseInfo.purpose());
+        assertFalse(databaseInfo.consoleEnabled(), "H2 console should be disabled in prod profile");
 
         logger.info("Prod Database Info: {}", databaseInfo);
     }
 
     @Test
     void testApplicationInfo() {
-        assertEquals("Spring Data JPA Persistence Demo", applicationInfo.getName());
-        assertEquals("prod", applicationInfo.getEnvironment());
-        assertNotNull(applicationInfo.getDescription());
+        assertEquals("Spring Data JPA Persistence Demo", applicationInfo.name());
+        assertEquals("prod", applicationInfo.environment());
+        assertNotNull(applicationInfo.description());
 
         logger.info("Application Info: {}", applicationInfo);
     }
@@ -101,9 +101,9 @@ class ProdProfileTest {
         
         // Should have production monitoring but NO debug features
         boolean hasProductionMonitoring = features.stream()
-                .anyMatch(f -> "production-monitoring".equals(f.getName()) && f.isEnabled());
+                .anyMatch(f -> "production-monitoring".equals(f.name()) && f.enabled());
         boolean hasDebugLogging = features.stream()
-                .anyMatch(f -> "debug-logging".equals(f.getName()));
+                .anyMatch(f -> "debug-logging".equals(f.name()));
 
         assertTrue(hasProductionMonitoring, "Prod profile should have production monitoring enabled");
         assertFalse(hasDebugLogging, "Prod profile should NOT have debug logging");

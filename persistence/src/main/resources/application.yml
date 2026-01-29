@@ -20,3 +20,4 @@ logging:
 app:
   name: Spring Data JPA Persistence Demo
   environment: ${spring.profiles.active:default}
+  description: "Spring Data JPA Persistence Demo application"

@@ -31,19 +31,19 @@ class TestProfileTest {
     @Test
     void testTestProfileConfiguration() {
         // Test database configuration
-        assertEquals("H2", databaseInfo.getType());
-        assertEquals("In-Memory", databaseInfo.getLocation());
-        assertEquals("Testing", databaseInfo.getPurpose());
-        assertFalse(databaseInfo.isConsoleEnabled(), "H2 console should be disabled in test profile");
+        assertEquals("H2", databaseInfo.type());
+        assertEquals("In-Memory", databaseInfo.location());
+        assertEquals("Testing", databaseInfo.purpose());
+        assertFalse(databaseInfo.consoleEnabled(), "H2 console should be disabled in test profile");
 
         logger.info("Test Database Info: {}", databaseInfo);
     }
 
     @Test
     void testApplicationInfo() {
-        assertEquals("Spring Data JPA Persistence Demo", applicationInfo.getName());
-        assertEquals("test", applicationInfo.getEnvironment());
-        assertNotNull(applicationInfo.getDescription());
+        assertEquals("Spring Data JPA Persistence Demo", applicationInfo.name());
+        assertEquals("test", applicationInfo.environment());
+        assertNotNull(applicationInfo.description());
 
         logger.info("Application Info: {}", applicationInfo);
     }
@@ -54,9 +54,9 @@ class TestProfileTest {
         
         // Should have h2-console (but disabled) and debug features in test profile
         boolean hasH2Console = features.stream()
-                .anyMatch(f -> "h2-console".equals(f.getName()));
+                .anyMatch(f -> "h2-console".equals(f.name()));
         boolean hasDebugLogging = features.stream()
-                .anyMatch(f -> "debug-logging".equals(f.getName()) && f.isEnabled());
+                .anyMatch(f -> "debug-logging".equals(f.name()) && f.enabled());
 
         assertTrue(hasH2Console, "Test profile should have H2 console feature bean");
         assertTrue(hasDebugLogging, "Test profile should have debug logging enabled");
